@@ -27,29 +27,34 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 def hostTable(request):
+    Host.objects.all().delete()
     HostTable=[]
-    
-    newfile = open('test.txt', 'r')
-    with open('test.txt','r') as i:
-        fileLines = i.readlines()
+    for file in glob.glob('/home/jfouch/djangoProjects/mysiteOne/*.txt'):
+    #newfile = open('test.txt', 'r')
+        with open(file,'r') as i:
+            fileLines = i.readlines()
     #for file in glob.glob('~/test.txt'):
     
         #    print(i.readLines())
-    for j in range(len(fileLines)):
-        HostTable.append(fileLines[j].split())
+        for j in range(len(fileLines)):
+            HostTable.append(fileLines[j].split())
     
     for k in range(len(HostTable)):
+        HostTable[2]=HostTable[k][2]+HostTable[k][3]
         HostTable[k].insert(3,HostTable[k].pop(1))
-        print(HostTable[0][1])
+        HostTable[k].pop(2)
     HostTable.sort()
-    (newHost, created) = Host.objects.get_or_create(
-    Ip_address=HostTable[0][0],
-    inci_date=datetime.strptime(HostTable[0][1], '%Y-%m-%d').date(),
-    inci_time=datetime.strptime(HostTable[0][2], '%H:%M:%S'),
-    port=HostTable[0][3],)
-    newHost.save()
+    for m in range(len(HostTable)):
+        (newHost, created) = Host.objects.get_or_create(
+        Ip_address=HostTable[m][0],
+        inci_time=datetime.strptime(HostTable[m][1], '%Y-%m-%d %H:%M:%S').date(),
+        port=HostTable[m][2],)
+        newHost.save()
+    
+    hostItem = Host.objects.all()
+    context = {'host': hostItem}
     #host= Host.objects.all()
-    return render(request,'polls/hostTable.html', {'host': newHost})
+    return render(request,'polls/hostTable.html', context)
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
