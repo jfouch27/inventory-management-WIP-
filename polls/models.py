@@ -31,6 +31,6 @@ def was_published_recently(self):
 # Create your models here.
 class Host(models.Model):
     Ip_address = models.CharField(max_length=100)
-    inci_time = models.DateTimeField('time recorded')
+    inci_time = models.DateTimeField()
     port = models.IntegerField(default=0)
-    
+      

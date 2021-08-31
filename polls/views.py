@@ -40,14 +40,16 @@ def hostTable(request):
             HostTable.append(fileLines[j].split())
     
     for k in range(len(HostTable)):
-        HostTable[2]=HostTable[k][2]+HostTable[k][3]
+        HostTable[k][2]=HostTable[k][2]+' '+HostTable[k][3]
+        
         HostTable[k].insert(3,HostTable[k].pop(1))
         HostTable[k].pop(2)
+        print(HostTable[k][1])
     HostTable.sort()
     for m in range(len(HostTable)):
         (newHost, created) = Host.objects.get_or_create(
         Ip_address=HostTable[m][0],
-        inci_time=datetime.strptime(HostTable[m][1], '%Y-%m-%d %H:%M:%S').date(),
+        inci_time=datetime.strptime(HostTable[m][1], '%Y-%m-%d %H:%M:%S'),
         port=HostTable[m][2],)
         newHost.save()
     
