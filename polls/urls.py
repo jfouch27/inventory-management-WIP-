@@ -10,4 +10,5 @@ urlpatterns  = [
     path('<int:pk>/results/',views.ResultsView.as_view(), name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     url(r'^hostTable/', views.hostTable, name='Host'),
+    url(r'^dataTable/', views.HostView, name='HostTable',)
 ]
