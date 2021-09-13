@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0001_initial'),
+        ("polls", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Host',
+            name="Host",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('Ip_address', models.CharField(max_length=100)),
-                ('inci_date', models.DateTimeField(verbose_name='date recorded')),
-                ('inci_time', models.DateTimeField(verbose_name='time recorded')),
-                ('port', models.IntegerField(default=0)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("Ip_address", models.CharField(max_length=100)),
+                ("inci_date", models.DateTimeField(verbose_name="date recorded")),
+                ("inci_time", models.DateTimeField(verbose_name="time recorded")),
+                ("port", models.IntegerField(default=0)),
             ],
         ),
     ]

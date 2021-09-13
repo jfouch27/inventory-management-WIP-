@@ -2,9 +2,9 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib import admin
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
+
 class MyUserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, password=None):
         """
@@ -12,7 +12,7 @@ class MyUserManager(BaseUserManager):
         birth and password.
         """
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError("Users must have an email address")
 
         user = self.model(
             email=self.normalize_email(email),
@@ -40,7 +40,7 @@ class MyUserManager(BaseUserManager):
 
 class MyUser(AbstractBaseUser):
     email = models.EmailField(
-        verbose_name='email address',
+        verbose_name="email address",
         max_length=255,
         unique=True,
     )
@@ -50,8 +50,8 @@ class MyUser(AbstractBaseUser):
 
     objects = MyUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["date_of_birth"]
 
     def __str__(self):
         return self.email
@@ -71,35 +71,41 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-        
+
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField("date published")
+
     def __str__(self):
         return self.question_text
-   # @admin.display(
+
+    # @admin.display(
     #    boolean=True
     #    ordering='pub_date',
     #    description='Published recently?',
 
-   # )
+    # )
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
     def __str__(self):
         return self.choice_text
+
 
 def was_published_recently(self):
     now = timezone.now()
     return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
 
 # Create your models here.
 class Host(models.Model):
     Ip_address = models.CharField(max_length=100)
     inci_time = models.DateTimeField()
     port = models.IntegerField(default=0)
-      

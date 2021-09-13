@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0003_remove_host_inci_date'),
+        ("polls", "0003_remove_host_inci_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='host',
-            name='inci_time',
+            model_name="host",
+            name="inci_time",
             field=models.DateTimeField(),
         ),
     ]

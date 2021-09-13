@@ -1,0 +1,2 @@
+Django==3.2.7
+git+https://github.com/wharton/django-data-tables-tags.git@45374c6
