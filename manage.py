@@ -5,7 +5,9 @@ import sys
 
 
 def main():
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysiteOne.settings")
+    DJENV = os.environ.get("DJENV", "dev")
+    os.environ.set("DJENV", DJENV)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
