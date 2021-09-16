@@ -6,7 +6,7 @@ import sys
 
 def main():
     DJENV = os.environ.get("DJENV", "dev")
-    os.environ.set("DJENV", DJENV)
+    os.environ["DJENV"] = DJENV
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
         from django.core.management import execute_from_command_line
