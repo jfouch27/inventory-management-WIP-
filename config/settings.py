@@ -7,17 +7,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
 if "upenn-prod-server" in gethostname():
-    os.environ.set("DJENV", "prod")
+    os.environ["DJENV"] = "prod"
 elif "upenn-stage-server" in gethostname():
-    os.environ.set("DJENV", "stage")
+    os.environ["DJENV"] = "stage"
 
 DJENV = os.environ.get("DJENV", "dev")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "&1#@dafxuuykfjwb-#h3l*in85)fi_1jc9talkve7p)yvahc@r"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# We'll set DEBUG = True below when we're in the dev environment.
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -118,3 +117,10 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# If we're in development, let's add a few more things and set DEBUG = True
+if DJENV == "dev":
+    INSTALLED_APPS += [
+        "django_extensions",
+    ]
+    DEBUG = True
