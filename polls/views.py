@@ -48,7 +48,6 @@ class HostView(TemplateView):
 
         HostTable[k].insert(3, HostTable[k].pop(1))
         HostTable[k].pop(2)
-        print(HostTable[k][1])
     HostTable.sort()
     for m in range(len(HostTable)):
         (newHost, created) = Host.objects.get_or_create(
@@ -59,7 +58,7 @@ class HostView(TemplateView):
         newHost.save()
 
     def get_context_data(self, **kwargs):
-        context = self.get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         context["hosts"] = (
             Host.objects.all()
@@ -92,7 +91,7 @@ def hostTable(request):
 
         HostTable[k].insert(3, HostTable[k].pop(1))
         HostTable[k].pop(2)
-        print(HostTable[k][1])
+        
     HostTable.sort()
     for m in range(len(HostTable)):
         (newHost, created) = Host.objects.get_or_create(

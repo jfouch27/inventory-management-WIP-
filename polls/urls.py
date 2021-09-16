@@ -13,7 +13,7 @@ urlpatterns = [
     url(r"^hostTable/", views.hostTable, name="Host"),
     url(
         r"^dataTable/",
-        views.HostView,
+        views.HostView.as_view(),
         name="HostTable",
     ),
 ]
