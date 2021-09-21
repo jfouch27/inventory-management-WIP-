@@ -24,8 +24,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    "polls.apps.PollsConfig",
+CONTRIB_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -33,6 +32,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+PROJECT_APPS = [
+    "users.apps.UsersConfig",
+]
+
+INSTALLED_APPS = CONTRIB_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -76,10 +81,13 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+# User Settings
 
-# AUTH_USER_MODEL = 'customauth.MyUser'
+AUTH_USER_MODEL = "users.User"
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
