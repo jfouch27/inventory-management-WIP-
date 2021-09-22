@@ -1,13 +1,19 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.views import generic
 from django.views.generic.base import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.forms import forms
 from datetime import datetime
 import glob
 
 from .models import Choice, Question, Host
+from users.models import User
+from .forms import LoginForm
 
 
 class IndexView(generic.ListView):
@@ -70,10 +76,26 @@ class HostView(TemplateView):
 
         return context
 
+class LoginView(generic.FormView):
+    form_class = LoginForm
+    #success_url = reverse('host')
+    template_name = 'polls/login.html'
 
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(self.request, user)
+            #return super(LoginView, self).form_valid(form)
+            return HttpResponseRedirect(reverse('polls/hostTable.html'))
+        else:
+            return self.form_invalid(form)           
+
+@login_required
 def hostTable(request):
-    # username = request.POST['username']
-    # password = request.POST['password']
+    print("host Hello")
     Host.objects.all().delete()
     HostTable = []
     for file in glob.glob("/home/jfouch/djangoProjects/mysiteOne/*.txt"):
