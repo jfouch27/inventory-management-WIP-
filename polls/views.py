@@ -88,14 +88,14 @@ class LoginView(generic.FormView):
 
         if user is not None and user.is_active:
             login(self.request, user)
+            print("yess")
             #return super(LoginView, self).form_valid(form)
-            return HttpResponseRedirect(reverse('polls/hostTable.html'))
+            return HttpResponseRedirect('/polls/hostTable/')
         else:
             return self.form_invalid(form)           
 
-@login_required
+@login_required()
 def hostTable(request):
-    print("host Hello")
     Host.objects.all().delete()
     HostTable = []
     for file in glob.glob("/home/jfouch/djangoProjects/mysiteOne/*.txt"):

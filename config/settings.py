@@ -59,7 +59,6 @@ SESSION_COOKIE_SECURE = True
 
 ROOT_URLCONF = "config.urls"
 
-LOGIN_REDIRECT_URL = 'index'
 
 TEMPLATES = [
     {
@@ -119,6 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+
+
+LOGIN_URL = "/polls/login"
+LOGIN_REDIRECT_URL = "/polls/hostTable"
 
 LANGUAGE_CODE = "en-us"
 
