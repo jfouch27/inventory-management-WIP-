@@ -25,20 +25,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 CONTRIB_APPS = [
-    'polls.apps.PollsConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
-    'crispy_forms',
-
 ]
 
 PROJECT_APPS = [
     "users.apps.UsersConfig",
+    "hosts.apps.HostsConfig",
 ]
 
 INSTALLED_APPS = CONTRIB_APPS + PROJECT_APPS
@@ -51,10 +48,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    
 ]
 
-SAML_SESSION_COOKIE_NAME = 'saml_session'
+SAML_SESSION_COOKIE_NAME = "saml_session"
 SESSION_COOKIE_SECURE = True
 
 ROOT_URLCONF = "config.urls"
@@ -77,8 +73,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-#LOGIN_URL = '/saml2/login/'
-#SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# LOGIN_URL = '/saml2/login/'
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 # Database
@@ -96,9 +92,7 @@ DATABASES = {
 
 AUTH_USER_MODEL = "users.User"
 
-AUTHENTICATION_BACKENDS = (
-    ('django.contrib.auth.backends.ModelBackend'),
-)
+AUTHENTICATION_BACKENDS = (("django.contrib.auth.backends.ModelBackend"),)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
