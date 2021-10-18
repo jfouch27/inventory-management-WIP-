@@ -114,8 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 
-LOGIN_URL = "/polls/login"
-LOGIN_REDIRECT_URL = "/polls/hostTable"
+LOGIN_URL = "/hosts/login"
+LOGIN_REDIRECT_URL = "/hosts/hostTable.html"
 
 LANGUAGE_CODE = "en-us"
 

@@ -1,7 +1,8 @@
 from socket import gethostbyaddr
 
 from django.db import models
-
+from django.utils import timezone
+import datetime
 
 class Host(models.Model):
     """
@@ -9,7 +10,7 @@ class Host(models.Model):
     """
     ip = models.GenericIPAddressField(null=False)
     name = models.CharField(max_length=191, null=False, blank=True)
-
+    time = models.DateTimeField()
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if self.pk is None:
