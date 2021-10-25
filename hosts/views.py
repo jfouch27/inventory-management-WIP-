@@ -10,13 +10,13 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.forms import forms
 from datetime import datetime
+import logging, traceback
 import glob
 
 from .models import Host
 from users.models import User
 from .forms import LoginForm
 # Create your views here.
-
 
 class IndexView(generic.ListView):
     template_name = "hosts/index.html"
@@ -72,4 +72,6 @@ def hostTable(request):
 
     hostItem = Host.objects.all()
     context = {"host": hostItem}
+    if bad_mojo:
+        legger.error('Something went wrong')
     return render(request, "hosts/hostTable.html", context)
