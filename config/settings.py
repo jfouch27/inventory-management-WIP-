@@ -14,7 +14,9 @@ elif "upenn-stage-server" in gethostname():
 DJENV = os.environ.get("DJENV", "dev")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "&1#@dafxuuykfjwb-#h3l*in85)fi_1jc9talkve7p)yvahc@r"
+with open('/usr/local/upenn/etc/inventory') as f:
+    SECRET_KEY = f.read().strip()
+
 
 # We'll set DEBUG = True below when we're in the dev environment.
 DEBUG = False
