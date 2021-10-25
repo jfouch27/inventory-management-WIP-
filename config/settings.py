@@ -23,7 +23,7 @@ DEBUG = False
 
 MAILER_LIST = ['jfouch@isc.upenn.edu']
 ADMINS = [('jfouch','jfouch@isc.upenn.edu')]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["probe.security.isc.upenn.edu"]
 #Logging, mind need more work
 LOGGING = {
     'version': 1,
@@ -158,7 +158,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SECURE_HSTS_SECONDS = 180
 SECURE_CONTENT_TYPE_NOSNIFF = True
-ALLOWED_HOSTS = ["probe.security.isc.upenn.edu"]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
