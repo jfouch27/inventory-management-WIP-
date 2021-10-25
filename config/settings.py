@@ -19,9 +19,83 @@ SECRET_KEY = "&1#@dafxuuykfjwb-#h3l*in85)fi_1jc9talkve7p)yvahc@r"
 # We'll set DEBUG = True below when we're in the dev environment.
 DEBUG = False
 
+MAILER_LIST = ['jfouch@isc.upenn.edu']
+ADMINS = [('jfouch','jfouch@isc.upenn.edu')]
 ALLOWED_HOSTS = []
-
-
+#Logging, mind need more work
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
+#First draft of logging, seems more comprehensive so might have to be revisited
+#LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
+#    'formatters': {
+#        'verbose': {
+#            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+#            'style': '{',
+#        },
+#        'simple': {
+#            'format': '{levelname} {message}',
+#            'style': '{',
+#        },
+#    },
+#    'filters': {
+#        'special': {
+#            '()': 'project.logging.SpecialFilter',
+#            'foo': 'bar',
+#        },
+#        'require_debug_true': {
+#            '()': 'django.utils.log.RequireDebugTrue',
+#        },
+#    },
+ #   'handlers': {
+ #       'console': {
+ #           'level': 'INFO',
+#            'filters': ['require_debug_true'],
+#            'class': 'logging.StreamHandler',
+#            'formatter': 'simple'
+#        },
+#        'mail_admins': {
+#            'level': 'ERROR',
+#            'class': 'django.utils.log.AdminEmailHandler',
+#            'filters': ['special']
+#        }
+#    },
+#    'loggers': {
+##        'django': {
+#            'handlers': ['console'],
+#            'propagate': True,
+#        },
+#        'django.request': {
+#            'handlers': ['mail_admins'],
+#            'level': 'ERROR',
+#            'propagate': False,
+#        },
+#        'myproject.custom': {
+#            'handlers': ['console', 'mail_admins'],
+#            'level': 'INFO',
+#            'filters': ['special']
+ #       }
+ #   }
+#}
 # Application definition
 
 CONTRIB_APPS = [
@@ -52,7 +126,12 @@ MIDDLEWARE = [
 
 SAML_SESSION_COOKIE_NAME = "saml_session"
 SESSION_COOKIE_SECURE = True
-
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_PRELOAD = True
 ROOT_URLCONF = "config.urls"
 
 
@@ -74,8 +153,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 # LOGIN_URL = '/saml2/login/'
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SECURE_HSTS_SECONDS = 180
+SECURE_CONTENT_TYPE_NOSNIFF = True
+ALLOWED_HOSTS = ["probe.security.isc.upenn.edu"]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -140,4 +221,4 @@ if DJENV == "dev":
     INSTALLED_APPS += [
         "django_extensions",
     ]
-    DEBUG = True
+    DEBUG = False
