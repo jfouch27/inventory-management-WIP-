@@ -16,7 +16,7 @@ DJENV = os.environ.get("DJENV", "dev")
 # SECURITY WARNING: keep the secret key used in production secret!
 with open('/usr/local/upenn/etc/inventory') as f:
     SECRET_KEY = f.read().strip()
-
+#SECRET_KEY = '405d^ckzf@czcvgdvo_1jj6=3qk-!#mc@@n*w%ile)t51=e$jt'
 # We'll set DEBUG = True below when we're in the dev environment.
 DEBUG = False
 
